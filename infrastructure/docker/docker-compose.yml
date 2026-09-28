@@ -1,0 +1,51 @@
+services:
+  postgres:
+    image: timescale/timescaledb:latest-pg16
+    container_name: hbridge-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: hbridge
+      POSTGRES_PASSWORD: Myhandle12
+      POSTGRES_DB: hbridge_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - hbridge_postgres_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hbridge"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: hbridge-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - hbridge_redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: hbridge-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@hbridge.rw
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+
+volumes:
+  hbridge_postgres_data:
+  hbridge_redis_data:
