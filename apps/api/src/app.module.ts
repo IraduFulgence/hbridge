@@ -3,6 +3,8 @@ import { HealthModule } from './modules/health/health.module.js';
 import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration.js';
 import { PrismaModule } from './prisma/prisma.module.js';
+import { AuthModule } from './modules/auth/auth.module.js';
+import { JwtAuthGuard } from './common/guards/jwt-auth.guard.js';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -12,8 +14,11 @@ import { PrismaModule } from './prisma/prisma.module.js';
     }),
     
     HealthModule,
-    PrismaModule ],
+    PrismaModule,
+    AuthModule,
+    
+   ],
   controllers: [],
-  providers: [],
+  providers: [JwtAuthGuard],
 })
 export class AppModule {}
