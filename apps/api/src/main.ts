@@ -14,4 +14,7 @@ async function bootstrap() {
   Logger.log(` ${appName} API running on ${port}`);
   Logger.log(`Health check: http://localhost:${port}/api/v1/health`);
 }
-await bootstrap();
+bootstrap().catch((err) => {
+  console.error('Fatal startup error:', err);
+  process.exit(1);
+});
