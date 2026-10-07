@@ -10,7 +10,8 @@ import { SmsModule } from './sms/sms.module.js';
 import { AuthModule } from './modules/auth/auth.module.js';
 import { HealthModule } from './modules/health/health.module.js';
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard.js';
-
+import { RolesGuard } from './common/guards/role.guard.js';
+import { UsersModule } from './modules/users/users.module.js';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -21,15 +22,20 @@ import { JwtAuthGuard } from './common/guards/jwt-auth.guard.js';
     PrismaModule,
     RedisModule,
     OtpModule,
-    SmsModule,      // ← was missing
+    SmsModule,    
     AuthModule,
     HealthModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
     },
   ],
 })
