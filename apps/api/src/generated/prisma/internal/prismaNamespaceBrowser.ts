@@ -51,7 +51,9 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  User: 'User'
+  User: 'User',
+  Household: 'Household',
+  Individual: 'Individual'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -87,6 +89,42 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const HouseholdScalarFieldEnum = {
+  id: 'id',
+  chwId: 'chwId',
+  village: 'village',
+  headName: 'headName',
+  headId: 'headId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type HouseholdScalarFieldEnum = (typeof HouseholdScalarFieldEnum)[keyof typeof HouseholdScalarFieldEnum]
+
+
+export const IndividualScalarFieldEnum = {
+  id: 'id',
+  householdId: 'householdId',
+  nationalId: 'nationalId',
+  mutuelleId: 'mutuelleId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  age: 'age',
+  dateOfBirth: 'dateOfBirth',
+  gender: 'gender',
+  phone: 'phone',
+  address: 'address',
+  hasHypertension: 'hasHypertension',
+  hasDiabetes: 'hasDiabetes',
+  hasEpilepsy: 'hasEpilepsy',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type IndividualScalarFieldEnum = (typeof IndividualScalarFieldEnum)[keyof typeof IndividualScalarFieldEnum]
 
 
 export const SortOrder = {

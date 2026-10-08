@@ -28,9 +28,55 @@ model User {
   languagePref String   @default("rw")
   district     String?
   sector       String?
-
+  households Household[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@map("users")
+}
+
+model Household {
+  id        String   @id @default(uuid())
+  chwId     String
+  chw       User     @relation(fields: [chwId], references: [id])
+  village   String
+  headName  String
+  headId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  individuals Individual[]
+
+  @@map("households")
+}
+
+model Individual {
+  id          String    @id @default(uuid())
+  householdId String
+  household   Household @relation(fields: [householdId], references: [id])
+  nationalId  String?   @unique
+  mutuelleId  String?
+  firstName   String
+  lastName    String
+  age         Int?
+  dateOfBirth DateTime?
+  gender      Gender
+  phone       String?
+  address     String?
+
+  hasHypertension Boolean @default(false)
+  hasDiabetes     Boolean @default(false)
+  hasEpilepsy     Boolean @default(false)
+
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("individuals")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
 }
