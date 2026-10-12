@@ -32,3 +32,8 @@ export type Household = Prisma.HouseholdModel
  * 
  */
 export type Individual = Prisma.IndividualModel
+/**
+ * Model Screening
+ * 
+ */
+export type Screening = Prisma.ScreeningModel

@@ -38,6 +38,7 @@ export type UserMinAggregateOutputType = {
   sector: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  supervisorId: string | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -54,6 +55,7 @@ export type UserMaxAggregateOutputType = {
   sector: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  supervisorId: string | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -70,6 +72,7 @@ export type UserCountAggregateOutputType = {
   sector: number
   createdAt: number
   updatedAt: number
+  supervisorId: number
   _all: number
 }
 
@@ -88,6 +91,7 @@ export type UserMinAggregateInputType = {
   sector?: true
   createdAt?: true
   updatedAt?: true
+  supervisorId?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -104,6 +108,7 @@ export type UserMaxAggregateInputType = {
   sector?: true
   createdAt?: true
   updatedAt?: true
+  supervisorId?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -120,6 +125,7 @@ export type UserCountAggregateInputType = {
   sector?: true
   createdAt?: true
   updatedAt?: true
+  supervisorId?: true
   _all?: true
 }
 
@@ -209,6 +215,7 @@ export type UserGroupByOutputType = {
   sector: string | null
   createdAt: Date
   updatedAt: Date
+  supervisorId: string | null
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -246,7 +253,11 @@ export type UserWhereInput = {
   sector?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  supervisorId?: Prisma.StringNullableFilter<"User"> | string | null
   households?: Prisma.HouseholdListRelationFilter
+  supervisor?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  supervisees?: Prisma.UserListRelationFilter
+  screenings?: Prisma.ScreeningListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -263,7 +274,11 @@ export type UserOrderByWithRelationInput = {
   sector?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  supervisorId?: Prisma.SortOrderInput | Prisma.SortOrder
   households?: Prisma.HouseholdOrderByRelationAggregateInput
+  supervisor?: Prisma.UserOrderByWithRelationInput
+  supervisees?: Prisma.UserOrderByRelationAggregateInput
+  screenings?: Prisma.ScreeningOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -283,7 +298,11 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   sector?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  supervisorId?: Prisma.StringNullableFilter<"User"> | string | null
   households?: Prisma.HouseholdListRelationFilter
+  supervisor?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  supervisees?: Prisma.UserListRelationFilter
+  screenings?: Prisma.ScreeningListRelationFilter
 }, "id" | "email" | "phone">
 
 export type UserOrderByWithAggregationInput = {
@@ -300,6 +319,7 @@ export type UserOrderByWithAggregationInput = {
   sector?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  supervisorId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -322,6 +342,7 @@ export type UserScalarWhereWithAggregatesInput = {
   sector?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  supervisorId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
 }
 
 export type UserCreateInput = {
@@ -339,6 +360,9 @@ export type UserCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   households?: Prisma.HouseholdCreateNestedManyWithoutChwInput
+  supervisor?: Prisma.UserCreateNestedOneWithoutSuperviseesInput
+  supervisees?: Prisma.UserCreateNestedManyWithoutSupervisorInput
+  screenings?: Prisma.ScreeningCreateNestedManyWithoutChwInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -355,7 +379,10 @@ export type UserUncheckedCreateInput = {
   sector?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  supervisorId?: string | null
   households?: Prisma.HouseholdUncheckedCreateNestedManyWithoutChwInput
+  supervisees?: Prisma.UserUncheckedCreateNestedManyWithoutSupervisorInput
+  screenings?: Prisma.ScreeningUncheckedCreateNestedManyWithoutChwInput
 }
 
 export type UserUpdateInput = {
@@ -373,6 +400,9 @@ export type UserUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   households?: Prisma.HouseholdUpdateManyWithoutChwNestedInput
+  supervisor?: Prisma.UserUpdateOneWithoutSuperviseesNestedInput
+  supervisees?: Prisma.UserUpdateManyWithoutSupervisorNestedInput
+  screenings?: Prisma.ScreeningUpdateManyWithoutChwNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -389,7 +419,10 @@ export type UserUncheckedUpdateInput = {
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  supervisorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   households?: Prisma.HouseholdUncheckedUpdateManyWithoutChwNestedInput
+  supervisees?: Prisma.UserUncheckedUpdateManyWithoutSupervisorNestedInput
+  screenings?: Prisma.ScreeningUncheckedUpdateManyWithoutChwNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -406,6 +439,7 @@ export type UserCreateManyInput = {
   sector?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  supervisorId?: string | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -438,6 +472,22 @@ export type UserUncheckedUpdateManyInput = {
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  supervisorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
+export type UserListRelationFilter = {
+  every?: Prisma.UserWhereInput
+  some?: Prisma.UserWhereInput
+  none?: Prisma.UserWhereInput
+}
+
+export type UserOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -454,6 +504,7 @@ export type UserCountOrderByAggregateInput = {
   sector?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  supervisorId?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -470,6 +521,7 @@ export type UserMaxOrderByAggregateInput = {
   sector?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  supervisorId?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -486,11 +538,32 @@ export type UserMinOrderByAggregateInput = {
   sector?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  supervisorId?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
   is?: Prisma.UserWhereInput
   isNot?: Prisma.UserWhereInput
+}
+
+export type UserCreateNestedOneWithoutSuperviseesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSuperviseesInput, Prisma.UserUncheckedCreateWithoutSuperviseesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSuperviseesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedManyWithoutSupervisorInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSupervisorInput, Prisma.UserUncheckedCreateWithoutSupervisorInput> | Prisma.UserCreateWithoutSupervisorInput[] | Prisma.UserUncheckedCreateWithoutSupervisorInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSupervisorInput | Prisma.UserCreateOrConnectWithoutSupervisorInput[]
+  createMany?: Prisma.UserCreateManySupervisorInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutSupervisorInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSupervisorInput, Prisma.UserUncheckedCreateWithoutSupervisorInput> | Prisma.UserCreateWithoutSupervisorInput[] | Prisma.UserUncheckedCreateWithoutSupervisorInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSupervisorInput | Prisma.UserCreateOrConnectWithoutSupervisorInput[]
+  createMany?: Prisma.UserCreateManySupervisorInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -513,6 +586,44 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
+export type UserUpdateOneWithoutSuperviseesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSuperviseesInput, Prisma.UserUncheckedCreateWithoutSuperviseesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSuperviseesInput
+  upsert?: Prisma.UserUpsertWithoutSuperviseesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSuperviseesInput, Prisma.UserUpdateWithoutSuperviseesInput>, Prisma.UserUncheckedUpdateWithoutSuperviseesInput>
+}
+
+export type UserUpdateManyWithoutSupervisorNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSupervisorInput, Prisma.UserUncheckedCreateWithoutSupervisorInput> | Prisma.UserCreateWithoutSupervisorInput[] | Prisma.UserUncheckedCreateWithoutSupervisorInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSupervisorInput | Prisma.UserCreateOrConnectWithoutSupervisorInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutSupervisorInput | Prisma.UserUpsertWithWhereUniqueWithoutSupervisorInput[]
+  createMany?: Prisma.UserCreateManySupervisorInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutSupervisorInput | Prisma.UserUpdateWithWhereUniqueWithoutSupervisorInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutSupervisorInput | Prisma.UserUpdateManyWithWhereWithoutSupervisorInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutSupervisorNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSupervisorInput, Prisma.UserUncheckedCreateWithoutSupervisorInput> | Prisma.UserCreateWithoutSupervisorInput[] | Prisma.UserUncheckedCreateWithoutSupervisorInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSupervisorInput | Prisma.UserCreateOrConnectWithoutSupervisorInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutSupervisorInput | Prisma.UserUpsertWithWhereUniqueWithoutSupervisorInput[]
+  createMany?: Prisma.UserCreateManySupervisorInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutSupervisorInput | Prisma.UserUpdateWithWhereUniqueWithoutSupervisorInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutSupervisorInput | Prisma.UserUpdateManyWithWhereWithoutSupervisorInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
 export type UserCreateNestedOneWithoutHouseholdsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutHouseholdsInput, Prisma.UserUncheckedCreateWithoutHouseholdsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutHouseholdsInput
@@ -525,6 +636,196 @@ export type UserUpdateOneRequiredWithoutHouseholdsNestedInput = {
   upsert?: Prisma.UserUpsertWithoutHouseholdsInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutHouseholdsInput, Prisma.UserUpdateWithoutHouseholdsInput>, Prisma.UserUncheckedUpdateWithoutHouseholdsInput>
+}
+
+export type UserCreateNestedOneWithoutScreeningsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutScreeningsInput, Prisma.UserUncheckedCreateWithoutScreeningsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutScreeningsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutScreeningsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutScreeningsInput, Prisma.UserUncheckedCreateWithoutScreeningsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutScreeningsInput
+  upsert?: Prisma.UserUpsertWithoutScreeningsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutScreeningsInput, Prisma.UserUpdateWithoutScreeningsInput>, Prisma.UserUncheckedUpdateWithoutScreeningsInput>
+}
+
+export type UserCreateWithoutSuperviseesInput = {
+  id?: string
+  email?: string | null
+  phone: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  role: $Enums.UserRole
+  isActive?: boolean
+  languagePref?: string
+  district?: string | null
+  sector?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  households?: Prisma.HouseholdCreateNestedManyWithoutChwInput
+  supervisor?: Prisma.UserCreateNestedOneWithoutSuperviseesInput
+  screenings?: Prisma.ScreeningCreateNestedManyWithoutChwInput
+}
+
+export type UserUncheckedCreateWithoutSuperviseesInput = {
+  id?: string
+  email?: string | null
+  phone: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  role: $Enums.UserRole
+  isActive?: boolean
+  languagePref?: string
+  district?: string | null
+  sector?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  supervisorId?: string | null
+  households?: Prisma.HouseholdUncheckedCreateNestedManyWithoutChwInput
+  screenings?: Prisma.ScreeningUncheckedCreateNestedManyWithoutChwInput
+}
+
+export type UserCreateOrConnectWithoutSuperviseesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSuperviseesInput, Prisma.UserUncheckedCreateWithoutSuperviseesInput>
+}
+
+export type UserCreateWithoutSupervisorInput = {
+  id?: string
+  email?: string | null
+  phone: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  role: $Enums.UserRole
+  isActive?: boolean
+  languagePref?: string
+  district?: string | null
+  sector?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  households?: Prisma.HouseholdCreateNestedManyWithoutChwInput
+  supervisees?: Prisma.UserCreateNestedManyWithoutSupervisorInput
+  screenings?: Prisma.ScreeningCreateNestedManyWithoutChwInput
+}
+
+export type UserUncheckedCreateWithoutSupervisorInput = {
+  id?: string
+  email?: string | null
+  phone: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  role: $Enums.UserRole
+  isActive?: boolean
+  languagePref?: string
+  district?: string | null
+  sector?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  households?: Prisma.HouseholdUncheckedCreateNestedManyWithoutChwInput
+  supervisees?: Prisma.UserUncheckedCreateNestedManyWithoutSupervisorInput
+  screenings?: Prisma.ScreeningUncheckedCreateNestedManyWithoutChwInput
+}
+
+export type UserCreateOrConnectWithoutSupervisorInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSupervisorInput, Prisma.UserUncheckedCreateWithoutSupervisorInput>
+}
+
+export type UserCreateManySupervisorInputEnvelope = {
+  data: Prisma.UserCreateManySupervisorInput | Prisma.UserCreateManySupervisorInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserUpsertWithoutSuperviseesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSuperviseesInput, Prisma.UserUncheckedUpdateWithoutSuperviseesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSuperviseesInput, Prisma.UserUncheckedCreateWithoutSuperviseesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSuperviseesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSuperviseesInput, Prisma.UserUncheckedUpdateWithoutSuperviseesInput>
+}
+
+export type UserUpdateWithoutSuperviseesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  languagePref?: Prisma.StringFieldUpdateOperationsInput | string
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  households?: Prisma.HouseholdUpdateManyWithoutChwNestedInput
+  supervisor?: Prisma.UserUpdateOneWithoutSuperviseesNestedInput
+  screenings?: Prisma.ScreeningUpdateManyWithoutChwNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSuperviseesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  languagePref?: Prisma.StringFieldUpdateOperationsInput | string
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  supervisorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  households?: Prisma.HouseholdUncheckedUpdateManyWithoutChwNestedInput
+  screenings?: Prisma.ScreeningUncheckedUpdateManyWithoutChwNestedInput
+}
+
+export type UserUpsertWithWhereUniqueWithoutSupervisorInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSupervisorInput, Prisma.UserUncheckedUpdateWithoutSupervisorInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSupervisorInput, Prisma.UserUncheckedCreateWithoutSupervisorInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutSupervisorInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSupervisorInput, Prisma.UserUncheckedUpdateWithoutSupervisorInput>
+}
+
+export type UserUpdateManyWithWhereWithoutSupervisorInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutSupervisorInput>
+}
+
+export type UserScalarWhereInput = {
+  AND?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+  OR?: Prisma.UserScalarWhereInput[]
+  NOT?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+  id?: Prisma.StringFilter<"User"> | string
+  email?: Prisma.StringNullableFilter<"User"> | string | null
+  phone?: Prisma.StringFilter<"User"> | string
+  passwordHash?: Prisma.StringFilter<"User"> | string
+  firstName?: Prisma.StringFilter<"User"> | string
+  lastName?: Prisma.StringFilter<"User"> | string
+  role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
+  isActive?: Prisma.BoolFilter<"User"> | boolean
+  languagePref?: Prisma.StringFilter<"User"> | string
+  district?: Prisma.StringNullableFilter<"User"> | string | null
+  sector?: Prisma.StringNullableFilter<"User"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  supervisorId?: Prisma.StringNullableFilter<"User"> | string | null
 }
 
 export type UserCreateWithoutHouseholdsInput = {
@@ -541,6 +842,9 @@ export type UserCreateWithoutHouseholdsInput = {
   sector?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  supervisor?: Prisma.UserCreateNestedOneWithoutSuperviseesInput
+  supervisees?: Prisma.UserCreateNestedManyWithoutSupervisorInput
+  screenings?: Prisma.ScreeningCreateNestedManyWithoutChwInput
 }
 
 export type UserUncheckedCreateWithoutHouseholdsInput = {
@@ -557,6 +861,9 @@ export type UserUncheckedCreateWithoutHouseholdsInput = {
   sector?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  supervisorId?: string | null
+  supervisees?: Prisma.UserUncheckedCreateNestedManyWithoutSupervisorInput
+  screenings?: Prisma.ScreeningUncheckedCreateNestedManyWithoutChwInput
 }
 
 export type UserCreateOrConnectWithoutHouseholdsInput = {
@@ -589,9 +896,177 @@ export type UserUpdateWithoutHouseholdsInput = {
   sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  supervisor?: Prisma.UserUpdateOneWithoutSuperviseesNestedInput
+  supervisees?: Prisma.UserUpdateManyWithoutSupervisorNestedInput
+  screenings?: Prisma.ScreeningUpdateManyWithoutChwNestedInput
 }
 
 export type UserUncheckedUpdateWithoutHouseholdsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  languagePref?: Prisma.StringFieldUpdateOperationsInput | string
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  supervisorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supervisees?: Prisma.UserUncheckedUpdateManyWithoutSupervisorNestedInput
+  screenings?: Prisma.ScreeningUncheckedUpdateManyWithoutChwNestedInput
+}
+
+export type UserCreateWithoutScreeningsInput = {
+  id?: string
+  email?: string | null
+  phone: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  role: $Enums.UserRole
+  isActive?: boolean
+  languagePref?: string
+  district?: string | null
+  sector?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  households?: Prisma.HouseholdCreateNestedManyWithoutChwInput
+  supervisor?: Prisma.UserCreateNestedOneWithoutSuperviseesInput
+  supervisees?: Prisma.UserCreateNestedManyWithoutSupervisorInput
+}
+
+export type UserUncheckedCreateWithoutScreeningsInput = {
+  id?: string
+  email?: string | null
+  phone: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  role: $Enums.UserRole
+  isActive?: boolean
+  languagePref?: string
+  district?: string | null
+  sector?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  supervisorId?: string | null
+  households?: Prisma.HouseholdUncheckedCreateNestedManyWithoutChwInput
+  supervisees?: Prisma.UserUncheckedCreateNestedManyWithoutSupervisorInput
+}
+
+export type UserCreateOrConnectWithoutScreeningsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutScreeningsInput, Prisma.UserUncheckedCreateWithoutScreeningsInput>
+}
+
+export type UserUpsertWithoutScreeningsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutScreeningsInput, Prisma.UserUncheckedUpdateWithoutScreeningsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutScreeningsInput, Prisma.UserUncheckedCreateWithoutScreeningsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutScreeningsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutScreeningsInput, Prisma.UserUncheckedUpdateWithoutScreeningsInput>
+}
+
+export type UserUpdateWithoutScreeningsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  languagePref?: Prisma.StringFieldUpdateOperationsInput | string
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  households?: Prisma.HouseholdUpdateManyWithoutChwNestedInput
+  supervisor?: Prisma.UserUpdateOneWithoutSuperviseesNestedInput
+  supervisees?: Prisma.UserUpdateManyWithoutSupervisorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutScreeningsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  languagePref?: Prisma.StringFieldUpdateOperationsInput | string
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  supervisorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  households?: Prisma.HouseholdUncheckedUpdateManyWithoutChwNestedInput
+  supervisees?: Prisma.UserUncheckedUpdateManyWithoutSupervisorNestedInput
+}
+
+export type UserCreateManySupervisorInput = {
+  id?: string
+  email?: string | null
+  phone: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  role: $Enums.UserRole
+  isActive?: boolean
+  languagePref?: string
+  district?: string | null
+  sector?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type UserUpdateWithoutSupervisorInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  languagePref?: Prisma.StringFieldUpdateOperationsInput | string
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  households?: Prisma.HouseholdUpdateManyWithoutChwNestedInput
+  supervisees?: Prisma.UserUpdateManyWithoutSupervisorNestedInput
+  screenings?: Prisma.ScreeningUpdateManyWithoutChwNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSupervisorInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  languagePref?: Prisma.StringFieldUpdateOperationsInput | string
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sector?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  households?: Prisma.HouseholdUncheckedUpdateManyWithoutChwNestedInput
+  supervisees?: Prisma.UserUncheckedUpdateManyWithoutSupervisorNestedInput
+  screenings?: Prisma.ScreeningUncheckedUpdateManyWithoutChwNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutSupervisorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -614,10 +1089,14 @@ export type UserUncheckedUpdateWithoutHouseholdsInput = {
 
 export type UserCountOutputType = {
   households: number
+  supervisees: number
+  screenings: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   households?: boolean | UserCountOutputTypeCountHouseholdsArgs
+  supervisees?: boolean | UserCountOutputTypeCountSuperviseesArgs
+  screenings?: boolean | UserCountOutputTypeCountScreeningsArgs
 }
 
 /**
@@ -637,6 +1116,20 @@ export type UserCountOutputTypeCountHouseholdsArgs<ExtArgs extends runtime.Types
   where?: Prisma.HouseholdWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSuperviseesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountScreeningsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ScreeningWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -652,7 +1145,11 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   sector?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  supervisorId?: boolean
   households?: boolean | Prisma.User$householdsArgs<ExtArgs>
+  supervisor?: boolean | Prisma.User$supervisorArgs<ExtArgs>
+  supervisees?: boolean | Prisma.User$superviseesArgs<ExtArgs>
+  screenings?: boolean | Prisma.User$screeningsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -670,6 +1167,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   sector?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  supervisorId?: boolean
+  supervisor?: boolean | Prisma.User$supervisorArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -686,6 +1185,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   sector?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  supervisorId?: boolean
+  supervisor?: boolean | Prisma.User$supervisorArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -702,20 +1203,31 @@ export type UserSelectScalar = {
   sector?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  supervisorId?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "phone" | "passwordHash" | "firstName" | "lastName" | "role" | "isActive" | "languagePref" | "district" | "sector" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "phone" | "passwordHash" | "firstName" | "lastName" | "role" | "isActive" | "languagePref" | "district" | "sector" | "createdAt" | "updatedAt" | "supervisorId", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   households?: boolean | Prisma.User$householdsArgs<ExtArgs>
+  supervisor?: boolean | Prisma.User$supervisorArgs<ExtArgs>
+  supervisees?: boolean | Prisma.User$superviseesArgs<ExtArgs>
+  screenings?: boolean | Prisma.User$screeningsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  supervisor?: boolean | Prisma.User$supervisorArgs<ExtArgs>
+}
+export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  supervisor?: boolean | Prisma.User$supervisorArgs<ExtArgs>
+}
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
     households: Prisma.$HouseholdPayload<ExtArgs>[]
+    supervisor: Prisma.$UserPayload<ExtArgs> | null
+    supervisees: Prisma.$UserPayload<ExtArgs>[]
+    screenings: Prisma.$ScreeningPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -731,6 +1243,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     sector: string | null
     createdAt: Date
     updatedAt: Date
+    supervisorId: string | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1126,6 +1639,9 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   households<T extends Prisma.User$householdsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$householdsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HouseholdPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  supervisor<T extends Prisma.User$supervisorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$supervisorArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  supervisees<T extends Prisma.User$superviseesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$superviseesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  screenings<T extends Prisma.User$screeningsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$screeningsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScreeningPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1168,6 +1684,7 @@ export interface UserFieldRefs {
   readonly sector: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly supervisorId: Prisma.FieldRef<"User", 'String'>
 }
     
 
@@ -1422,6 +1939,10 @@ export type UserCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    */
   data: Prisma.UserCreateManyInput | Prisma.UserCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1492,6 +2013,10 @@ export type UserUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many Users to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1582,6 +2107,73 @@ export type User$householdsArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.HouseholdScalarFieldEnum | Prisma.HouseholdScalarFieldEnum[]
+}
+
+/**
+ * User.supervisor
+ */
+export type User$supervisorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * User.supervisees
+ */
+export type User$superviseesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
+  cursor?: Prisma.UserWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
+}
+
+/**
+ * User.screenings
+ */
+export type User$screeningsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Screening
+   */
+  select?: Prisma.ScreeningSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Screening
+   */
+  omit?: Prisma.ScreeningOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ScreeningInclude<ExtArgs> | null
+  where?: Prisma.ScreeningWhereInput
+  orderBy?: Prisma.ScreeningOrderByWithRelationInput | Prisma.ScreeningOrderByWithRelationInput[]
+  cursor?: Prisma.ScreeningWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ScreeningScalarFieldEnum | Prisma.ScreeningScalarFieldEnum[]
 }
 
 /**

@@ -3,5 +3,7 @@ export enum userRole {
     ADMIN = 'ADMIN',
     NURSE = 'NURSE',
     DOCTOR ='DOCTOR',
-    MH_PROFESSIONAL ='MH_PROFESSIONAL'
+    MH_PROFESSIONAL ='MH_PROFESSIONAL',
+    CHO = 'CHO',
+    SUPERVISOR = 'SUPERVISOR'
 }

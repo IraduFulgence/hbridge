@@ -53,7 +53,8 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Household: 'Household',
-  Individual: 'Individual'
+  Individual: 'Individual',
+  Screening: 'Screening'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -85,7 +86,8 @@ export const UserScalarFieldEnum = {
   district: 'district',
   sector: 'sector',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  supervisorId: 'supervisorId'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -127,12 +129,37 @@ export const IndividualScalarFieldEnum = {
 export type IndividualScalarFieldEnum = (typeof IndividualScalarFieldEnum)[keyof typeof IndividualScalarFieldEnum]
 
 
+export const ScreeningScalarFieldEnum = {
+  id: 'id',
+  individualId: 'individualId',
+  chwId: 'chwId',
+  screeningType: 'screeningType',
+  responses: 'responses',
+  score: 'score',
+  triageLevel: 'triageLevel',
+  notes: 'notes',
+  voiceNotePath: 'voiceNotePath',
+  administeredAt: 'administeredAt',
+  syncedAt: 'syncedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type ScreeningScalarFieldEnum = (typeof ScreeningScalarFieldEnum)[keyof typeof ScreeningScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -149,4 +176,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

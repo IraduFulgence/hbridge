@@ -12,11 +12,11 @@ import { userRole } from '../../common/constants/roles.enum.js';
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findAll(filters?: { role?: userRole;  }) {
+  async findAll(filters?: { role?: userRole; supervisorId?: string }) {
     return this.prisma.user.findMany({
       where: {
         ...(filters?.role && { role: filters.role }),
-        
+        ...(filters?.supervisorId && { supervisorId: filters.supervisorId }),
       },
       select: {
         id: true,
@@ -28,7 +28,7 @@ export class UsersService {
         district: true,
         sector: true,
         isActive: true,
-        
+        supervisorId: true,
         createdAt: true,
       },
       orderBy: { createdAt: 'desc' },
@@ -48,7 +48,7 @@ export class UsersService {
         district: true,
         sector: true,
         isActive: true,
-       
+        supervisorId: true,
         createdAt: true,
       },
     });
@@ -81,7 +81,7 @@ export class UsersService {
         role: dto.role,
         district: dto.district,
         sector: dto.sector,
-        
+        supervisorId: dto.supervisorId,
       },
       select: {
         id: true,
@@ -93,6 +93,7 @@ export class UsersService {
         district: true,
         sector: true,
         isActive: true,
+        supervisorId: true,
         createdAt: true,
       },
     });

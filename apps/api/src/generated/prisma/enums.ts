@@ -14,7 +14,9 @@ export const UserRole = {
   NURSE: 'NURSE',
   DOCTOR: 'DOCTOR',
   MH_PROFESSIONAL: 'MH_PROFESSIONAL',
-  ADMIN: 'ADMIN'
+  ADMIN: 'ADMIN',
+  CHO: 'CHO',
+  SUPERVISOR: 'SUPERVISOR'
 } as const
 
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
@@ -27,3 +29,30 @@ export const Gender = {
 } as const
 
 export type Gender = (typeof Gender)[keyof typeof Gender]
+
+
+export const ScreeningType = {
+  HYPERTENSION: 'HYPERTENSION',
+  DIABETES: 'DIABETES',
+  PHQ9: 'PHQ9',
+  GAD7: 'GAD7',
+  PSYCHOSIS: 'PSYCHOSIS',
+  BIPOLAR: 'BIPOLAR',
+  PTSD: 'PTSD',
+  OCD: 'OCD',
+  SUBSTANCE_USE: 'SUBSTANCE_USE',
+  SUICIDE_RISK: 'SUICIDE_RISK',
+  DELIRIUM: 'DELIRIUM',
+  EPILEPSY: 'EPILEPSY'
+} as const
+
+export type ScreeningType = (typeof ScreeningType)[keyof typeof ScreeningType]
+
+
+export const TriageLevel = {
+  GREEN: 'GREEN',
+  YELLOW: 'YELLOW',
+  RED: 'RED'
+} as const
+
+export type TriageLevel = (typeof TriageLevel)[keyof typeof TriageLevel]

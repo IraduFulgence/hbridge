@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
   moduleFormat = "cjs"
 }
 
@@ -14,23 +14,29 @@ enum UserRole {
   DOCTOR
   MH_PROFESSIONAL
   ADMIN
+  CHO
+  SUPERVISOR
 }
 
 model User {
-  id           String   @id @default(uuid())
-  email        String?  @unique
-  phone        String   @unique
+  id           String      @id @default(uuid())
+  email        String?     @unique
+  phone        String      @unique
   passwordHash String
   firstName    String
   lastName     String
   role         UserRole
-  isActive     Boolean  @default(true)
-  languagePref String   @default("rw")
+  isActive     Boolean     @default(true)
+  languagePref String      @default("rw")
   district     String?
   sector       String?
-  households Household[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  households   Household[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  supervisorId String?
+  supervisor   User?       @relation("CHWSupervisor", fields: [supervisorId], references: [id])
+  supervisees  User[]      @relation("CHWSupervisor")
+  screenings   Screening[]
 
   @@map("users")
 }
@@ -41,7 +47,7 @@ model Household {
   chw       User     @relation(fields: [chwId], references: [id])
   village   String
   headName  String
-  headId    String
+  headId    String?  @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -68,15 +74,58 @@ model Individual {
   hasDiabetes     Boolean @default(false)
   hasEpilepsy     Boolean @default(false)
 
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  isActive   Boolean     @default(true)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  screenings Screening[]
 
   @@map("individuals")
+}
+
+model Screening {
+  id             String        @id @default(uuid())
+  individualId   String
+  individual     Individual    @relation(fields: [individualId], references: [id])
+  chwId          String
+  chw            User          @relation(fields: [chwId], references: [id])
+  screeningType  ScreeningType
+  responses      Json
+  score          Int?
+  triageLevel    TriageLevel
+  notes          String?
+  voiceNotePath  String?
+  administeredAt DateTime      @default(now())
+  syncedAt       DateTime?
+  createdAt      DateTime      @default(now())
+
+  @@index([individualId, screeningType])
+  @@index([chwId, administeredAt])
+  @@map("screenings")
 }
 
 enum Gender {
   MALE
   FEMALE
   OTHER
+}
+
+enum ScreeningType {
+  HYPERTENSION
+  DIABETES
+  PHQ9
+  GAD7
+  PSYCHOSIS
+  BIPOLAR
+  PTSD
+  OCD
+  SUBSTANCE_USE
+  SUICIDE_RISK
+  DELIRIUM
+  EPILEPSY
+}
+
+enum TriageLevel {
+  GREEN
+  YELLOW
+  RED
 }

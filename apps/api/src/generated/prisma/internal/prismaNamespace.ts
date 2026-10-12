@@ -399,7 +399,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   User: 'User',
   Household: 'Household',
-  Individual: 'Individual'
+  Individual: 'Individual',
+  Screening: 'Screening'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -415,7 +416,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "household" | "individual"
+    modelProps: "user" | "household" | "individual" | "screening"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -641,6 +642,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Screening: {
+      payload: Prisma.$ScreeningPayload<ExtArgs>
+      fields: Prisma.ScreeningFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ScreeningFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScreeningPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ScreeningFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScreeningPayload>
+        }
+        findFirst: {
+          args: Prisma.ScreeningFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScreeningPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ScreeningFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScreeningPayload>
+        }
+        findMany: {
+          args: Prisma.ScreeningFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScreeningPayload>[]
+        }
+        create: {
+          args: Prisma.ScreeningCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScreeningPayload>
+        }
+        createMany: {
+          args: Prisma.ScreeningCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ScreeningCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScreeningPayload>[]
+        }
+        delete: {
+          args: Prisma.ScreeningDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScreeningPayload>
+        }
+        update: {
+          args: Prisma.ScreeningUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScreeningPayload>
+        }
+        deleteMany: {
+          args: Prisma.ScreeningDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ScreeningUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ScreeningUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScreeningPayload>[]
+        }
+        upsert: {
+          args: Prisma.ScreeningUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScreeningPayload>
+        }
+        aggregate: {
+          args: Prisma.ScreeningAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateScreening>
+        }
+        groupBy: {
+          args: Prisma.ScreeningGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ScreeningGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ScreeningCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ScreeningCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -693,7 +768,8 @@ export const UserScalarFieldEnum = {
   district: 'district',
   sector: 'sector',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  supervisorId: 'supervisorId'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -735,12 +811,37 @@ export const IndividualScalarFieldEnum = {
 export type IndividualScalarFieldEnum = (typeof IndividualScalarFieldEnum)[keyof typeof IndividualScalarFieldEnum]
 
 
+export const ScreeningScalarFieldEnum = {
+  id: 'id',
+  individualId: 'individualId',
+  chwId: 'chwId',
+  screeningType: 'screeningType',
+  responses: 'responses',
+  score: 'score',
+  triageLevel: 'triageLevel',
+  notes: 'notes',
+  voiceNotePath: 'voiceNotePath',
+  administeredAt: 'administeredAt',
+  syncedAt: 'syncedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type ScreeningScalarFieldEnum = (typeof ScreeningScalarFieldEnum)[keyof typeof ScreeningScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -757,6 +858,15 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
 
@@ -839,6 +949,48 @@ export type EnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
  * Reference to a field of type 'Gender[]'
  */
 export type ListEnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ScreeningType'
+ */
+export type EnumScreeningTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ScreeningType'>
+    
+
+
+/**
+ * Reference to a field of type 'ScreeningType[]'
+ */
+export type ListEnumScreeningTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ScreeningType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+/**
+ * Reference to a field of type 'TriageLevel'
+ */
+export type EnumTriageLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TriageLevel'>
+    
+
+
+/**
+ * Reference to a field of type 'TriageLevel[]'
+ */
+export type ListEnumTriageLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TriageLevel[]'>
     
 
 
@@ -1009,6 +1161,7 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   household?: Prisma.HouseholdOmit
   individual?: Prisma.IndividualOmit
+  screening?: Prisma.ScreeningOmit
 }
 
 /* Types for Logging */

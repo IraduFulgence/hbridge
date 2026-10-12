@@ -12,6 +12,8 @@ import { HealthModule } from './modules/health/health.module.js';
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard.js';
 import { RolesGuard } from './common/guards/role.guard.js';
 import { UsersModule } from './modules/users/users.module.js';
+import { PatientsModule } from './modules/patients/patient.module.js';
+import { ScreeningsModule } from './modules/screenings/screening.module.js';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -26,6 +28,8 @@ import { UsersModule } from './modules/users/users.module.js';
     AuthModule,
     HealthModule,
     UsersModule,
+    PatientsModule,
+    ScreeningsModule,
   ],
   controllers: [],
   providers: [

@@ -28,7 +28,12 @@ export class UsersController {
     @CurrentUser() currentUser: { id: string; role: userRole },
     @Query('role') role?: userRole,
   ) {
-
+      if (
+      currentUser.role === userRole.CHO ||
+      currentUser.role === userRole.SUPERVISOR
+    ) {
+      return this.users.findAll({ supervisorId: currentUser.id });
+    }
     // ADMIN sees everyone, with optional role filter
     return this.users.findAll({ role });
   }

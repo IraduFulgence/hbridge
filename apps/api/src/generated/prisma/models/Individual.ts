@@ -313,6 +313,7 @@ export type IndividualWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Individual"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Individual"> | Date | string
   household?: Prisma.XOR<Prisma.HouseholdScalarRelationFilter, Prisma.HouseholdWhereInput>
+  screenings?: Prisma.ScreeningListRelationFilter
 }
 
 export type IndividualOrderByWithRelationInput = {
@@ -334,6 +335,7 @@ export type IndividualOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   household?: Prisma.HouseholdOrderByWithRelationInput
+  screenings?: Prisma.ScreeningOrderByRelationAggregateInput
 }
 
 export type IndividualWhereUniqueInput = Prisma.AtLeast<{
@@ -358,6 +360,7 @@ export type IndividualWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Individual"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Individual"> | Date | string
   household?: Prisma.XOR<Prisma.HouseholdScalarRelationFilter, Prisma.HouseholdWhereInput>
+  screenings?: Prisma.ScreeningListRelationFilter
 }, "id" | "nationalId">
 
 export type IndividualOrderByWithAggregationInput = {
@@ -426,6 +429,7 @@ export type IndividualCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   household: Prisma.HouseholdCreateNestedOneWithoutIndividualsInput
+  screenings?: Prisma.ScreeningCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualUncheckedCreateInput = {
@@ -446,6 +450,7 @@ export type IndividualUncheckedCreateInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  screenings?: Prisma.ScreeningUncheckedCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualUpdateInput = {
@@ -466,6 +471,7 @@ export type IndividualUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   household?: Prisma.HouseholdUpdateOneRequiredWithoutIndividualsNestedInput
+  screenings?: Prisma.ScreeningUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualUncheckedUpdateInput = {
@@ -486,6 +492,7 @@ export type IndividualUncheckedUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  screenings?: Prisma.ScreeningUncheckedUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualCreateManyInput = {
@@ -625,6 +632,11 @@ export type IndividualSumOrderByAggregateInput = {
   age?: Prisma.SortOrder
 }
 
+export type IndividualScalarRelationFilter = {
+  is?: Prisma.IndividualWhereInput
+  isNot?: Prisma.IndividualWhereInput
+}
+
 export type IndividualCreateNestedManyWithoutHouseholdInput = {
   create?: Prisma.XOR<Prisma.IndividualCreateWithoutHouseholdInput, Prisma.IndividualUncheckedCreateWithoutHouseholdInput> | Prisma.IndividualCreateWithoutHouseholdInput[] | Prisma.IndividualUncheckedCreateWithoutHouseholdInput[]
   connectOrCreate?: Prisma.IndividualCreateOrConnectWithoutHouseholdInput | Prisma.IndividualCreateOrConnectWithoutHouseholdInput[]
@@ -683,6 +695,20 @@ export type EnumGenderFieldUpdateOperationsInput = {
   set?: $Enums.Gender
 }
 
+export type IndividualCreateNestedOneWithoutScreeningsInput = {
+  create?: Prisma.XOR<Prisma.IndividualCreateWithoutScreeningsInput, Prisma.IndividualUncheckedCreateWithoutScreeningsInput>
+  connectOrCreate?: Prisma.IndividualCreateOrConnectWithoutScreeningsInput
+  connect?: Prisma.IndividualWhereUniqueInput
+}
+
+export type IndividualUpdateOneRequiredWithoutScreeningsNestedInput = {
+  create?: Prisma.XOR<Prisma.IndividualCreateWithoutScreeningsInput, Prisma.IndividualUncheckedCreateWithoutScreeningsInput>
+  connectOrCreate?: Prisma.IndividualCreateOrConnectWithoutScreeningsInput
+  upsert?: Prisma.IndividualUpsertWithoutScreeningsInput
+  connect?: Prisma.IndividualWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.IndividualUpdateToOneWithWhereWithoutScreeningsInput, Prisma.IndividualUpdateWithoutScreeningsInput>, Prisma.IndividualUncheckedUpdateWithoutScreeningsInput>
+}
+
 export type IndividualCreateWithoutHouseholdInput = {
   id?: string
   nationalId?: string | null
@@ -700,6 +726,7 @@ export type IndividualCreateWithoutHouseholdInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  screenings?: Prisma.ScreeningCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualUncheckedCreateWithoutHouseholdInput = {
@@ -719,6 +746,7 @@ export type IndividualUncheckedCreateWithoutHouseholdInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  screenings?: Prisma.ScreeningUncheckedCreateNestedManyWithoutIndividualInput
 }
 
 export type IndividualCreateOrConnectWithoutHouseholdInput = {
@@ -770,6 +798,102 @@ export type IndividualScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Individual"> | Date | string
 }
 
+export type IndividualCreateWithoutScreeningsInput = {
+  id?: string
+  nationalId?: string | null
+  mutuelleId?: string | null
+  firstName: string
+  lastName: string
+  age?: number | null
+  dateOfBirth?: Date | string | null
+  gender: $Enums.Gender
+  phone?: string | null
+  address?: string | null
+  hasHypertension?: boolean
+  hasDiabetes?: boolean
+  hasEpilepsy?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  household: Prisma.HouseholdCreateNestedOneWithoutIndividualsInput
+}
+
+export type IndividualUncheckedCreateWithoutScreeningsInput = {
+  id?: string
+  householdId: string
+  nationalId?: string | null
+  mutuelleId?: string | null
+  firstName: string
+  lastName: string
+  age?: number | null
+  dateOfBirth?: Date | string | null
+  gender: $Enums.Gender
+  phone?: string | null
+  address?: string | null
+  hasHypertension?: boolean
+  hasDiabetes?: boolean
+  hasEpilepsy?: boolean
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type IndividualCreateOrConnectWithoutScreeningsInput = {
+  where: Prisma.IndividualWhereUniqueInput
+  create: Prisma.XOR<Prisma.IndividualCreateWithoutScreeningsInput, Prisma.IndividualUncheckedCreateWithoutScreeningsInput>
+}
+
+export type IndividualUpsertWithoutScreeningsInput = {
+  update: Prisma.XOR<Prisma.IndividualUpdateWithoutScreeningsInput, Prisma.IndividualUncheckedUpdateWithoutScreeningsInput>
+  create: Prisma.XOR<Prisma.IndividualCreateWithoutScreeningsInput, Prisma.IndividualUncheckedCreateWithoutScreeningsInput>
+  where?: Prisma.IndividualWhereInput
+}
+
+export type IndividualUpdateToOneWithWhereWithoutScreeningsInput = {
+  where?: Prisma.IndividualWhereInput
+  data: Prisma.XOR<Prisma.IndividualUpdateWithoutScreeningsInput, Prisma.IndividualUncheckedUpdateWithoutScreeningsInput>
+}
+
+export type IndividualUpdateWithoutScreeningsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mutuelleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasHypertension?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasDiabetes?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasEpilepsy?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  household?: Prisma.HouseholdUpdateOneRequiredWithoutIndividualsNestedInput
+}
+
+export type IndividualUncheckedUpdateWithoutScreeningsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  householdId?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mutuelleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  age?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hasHypertension?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasDiabetes?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasEpilepsy?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type IndividualCreateManyHouseholdInput = {
   id?: string
   nationalId?: string | null
@@ -806,6 +930,7 @@ export type IndividualUpdateWithoutHouseholdInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  screenings?: Prisma.ScreeningUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualUncheckedUpdateWithoutHouseholdInput = {
@@ -825,6 +950,7 @@ export type IndividualUncheckedUpdateWithoutHouseholdInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  screenings?: Prisma.ScreeningUncheckedUpdateManyWithoutIndividualNestedInput
 }
 
 export type IndividualUncheckedUpdateManyWithoutHouseholdInput = {
@@ -847,6 +973,35 @@ export type IndividualUncheckedUpdateManyWithoutHouseholdInput = {
 }
 
 
+/**
+ * Count Type IndividualCountOutputType
+ */
+
+export type IndividualCountOutputType = {
+  screenings: number
+}
+
+export type IndividualCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  screenings?: boolean | IndividualCountOutputTypeCountScreeningsArgs
+}
+
+/**
+ * IndividualCountOutputType without action
+ */
+export type IndividualCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the IndividualCountOutputType
+   */
+  select?: Prisma.IndividualCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * IndividualCountOutputType without action
+ */
+export type IndividualCountOutputTypeCountScreeningsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ScreeningWhereInput
+}
+
 
 export type IndividualSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -867,6 +1022,8 @@ export type IndividualSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   createdAt?: boolean
   updatedAt?: boolean
   household?: boolean | Prisma.HouseholdDefaultArgs<ExtArgs>
+  screenings?: boolean | Prisma.Individual$screeningsArgs<ExtArgs>
+  _count?: boolean | Prisma.IndividualCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["individual"]>
 
 export type IndividualSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -934,6 +1091,8 @@ export type IndividualSelectScalar = {
 export type IndividualOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "householdId" | "nationalId" | "mutuelleId" | "firstName" | "lastName" | "age" | "dateOfBirth" | "gender" | "phone" | "address" | "hasHypertension" | "hasDiabetes" | "hasEpilepsy" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["individual"]>
 export type IndividualInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   household?: boolean | Prisma.HouseholdDefaultArgs<ExtArgs>
+  screenings?: boolean | Prisma.Individual$screeningsArgs<ExtArgs>
+  _count?: boolean | Prisma.IndividualCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type IndividualIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   household?: boolean | Prisma.HouseholdDefaultArgs<ExtArgs>
@@ -946,6 +1105,7 @@ export type $IndividualPayload<ExtArgs extends runtime.Types.Extensions.Internal
   name: "Individual"
   objects: {
     household: Prisma.$HouseholdPayload<ExtArgs>
+    screenings: Prisma.$ScreeningPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1360,6 +1520,7 @@ readonly fields: IndividualFieldRefs;
 export interface Prisma__IndividualClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   household<T extends Prisma.HouseholdDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HouseholdDefaultArgs<ExtArgs>>): Prisma.Prisma__HouseholdClient<runtime.Types.Result.GetResult<Prisma.$HouseholdPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  screenings<T extends Prisma.Individual$screeningsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Individual$screeningsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScreeningPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1804,6 +1965,30 @@ export type IndividualDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many Individuals to delete.
    */
   limit?: number
+}
+
+/**
+ * Individual.screenings
+ */
+export type Individual$screeningsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Screening
+   */
+  select?: Prisma.ScreeningSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Screening
+   */
+  omit?: Prisma.ScreeningOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ScreeningInclude<ExtArgs> | null
+  where?: Prisma.ScreeningWhereInput
+  orderBy?: Prisma.ScreeningOrderByWithRelationInput | Prisma.ScreeningOrderByWithRelationInput[]
+  cursor?: Prisma.ScreeningWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ScreeningScalarFieldEnum | Prisma.ScreeningScalarFieldEnum[]
 }
 
 /**

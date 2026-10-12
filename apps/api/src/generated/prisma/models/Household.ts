@@ -164,7 +164,7 @@ export type HouseholdGroupByOutputType = {
   chwId: string
   village: string
   headName: string
-  headId: string
+  headId: string | null
   createdAt: Date
   updatedAt: Date
   _count: HouseholdCountAggregateOutputType | null
@@ -195,7 +195,7 @@ export type HouseholdWhereInput = {
   chwId?: Prisma.StringFilter<"Household"> | string
   village?: Prisma.StringFilter<"Household"> | string
   headName?: Prisma.StringFilter<"Household"> | string
-  headId?: Prisma.StringFilter<"Household"> | string
+  headId?: Prisma.StringNullableFilter<"Household"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Household"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Household"> | Date | string
   chw?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -207,7 +207,7 @@ export type HouseholdOrderByWithRelationInput = {
   chwId?: Prisma.SortOrder
   village?: Prisma.SortOrder
   headName?: Prisma.SortOrder
-  headId?: Prisma.SortOrder
+  headId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   chw?: Prisma.UserOrderByWithRelationInput
@@ -216,25 +216,25 @@ export type HouseholdOrderByWithRelationInput = {
 
 export type HouseholdWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  headId?: string
   AND?: Prisma.HouseholdWhereInput | Prisma.HouseholdWhereInput[]
   OR?: Prisma.HouseholdWhereInput[]
   NOT?: Prisma.HouseholdWhereInput | Prisma.HouseholdWhereInput[]
   chwId?: Prisma.StringFilter<"Household"> | string
   village?: Prisma.StringFilter<"Household"> | string
   headName?: Prisma.StringFilter<"Household"> | string
-  headId?: Prisma.StringFilter<"Household"> | string
   createdAt?: Prisma.DateTimeFilter<"Household"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Household"> | Date | string
   chw?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   individuals?: Prisma.IndividualListRelationFilter
-}, "id">
+}, "id" | "headId">
 
 export type HouseholdOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   chwId?: Prisma.SortOrder
   village?: Prisma.SortOrder
   headName?: Prisma.SortOrder
-  headId?: Prisma.SortOrder
+  headId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.HouseholdCountOrderByAggregateInput
@@ -250,7 +250,7 @@ export type HouseholdScalarWhereWithAggregatesInput = {
   chwId?: Prisma.StringWithAggregatesFilter<"Household"> | string
   village?: Prisma.StringWithAggregatesFilter<"Household"> | string
   headName?: Prisma.StringWithAggregatesFilter<"Household"> | string
-  headId?: Prisma.StringWithAggregatesFilter<"Household"> | string
+  headId?: Prisma.StringNullableWithAggregatesFilter<"Household"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Household"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Household"> | Date | string
 }
@@ -259,7 +259,7 @@ export type HouseholdCreateInput = {
   id?: string
   village: string
   headName: string
-  headId: string
+  headId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   chw: Prisma.UserCreateNestedOneWithoutHouseholdsInput
@@ -271,7 +271,7 @@ export type HouseholdUncheckedCreateInput = {
   chwId: string
   village: string
   headName: string
-  headId: string
+  headId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   individuals?: Prisma.IndividualUncheckedCreateNestedManyWithoutHouseholdInput
@@ -281,7 +281,7 @@ export type HouseholdUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   village?: Prisma.StringFieldUpdateOperationsInput | string
   headName?: Prisma.StringFieldUpdateOperationsInput | string
-  headId?: Prisma.StringFieldUpdateOperationsInput | string
+  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chw?: Prisma.UserUpdateOneRequiredWithoutHouseholdsNestedInput
@@ -293,7 +293,7 @@ export type HouseholdUncheckedUpdateInput = {
   chwId?: Prisma.StringFieldUpdateOperationsInput | string
   village?: Prisma.StringFieldUpdateOperationsInput | string
   headName?: Prisma.StringFieldUpdateOperationsInput | string
-  headId?: Prisma.StringFieldUpdateOperationsInput | string
+  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   individuals?: Prisma.IndividualUncheckedUpdateManyWithoutHouseholdNestedInput
@@ -304,7 +304,7 @@ export type HouseholdCreateManyInput = {
   chwId: string
   village: string
   headName: string
-  headId: string
+  headId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -313,7 +313,7 @@ export type HouseholdUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   village?: Prisma.StringFieldUpdateOperationsInput | string
   headName?: Prisma.StringFieldUpdateOperationsInput | string
-  headId?: Prisma.StringFieldUpdateOperationsInput | string
+  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -323,7 +323,7 @@ export type HouseholdUncheckedUpdateManyInput = {
   chwId?: Prisma.StringFieldUpdateOperationsInput | string
   village?: Prisma.StringFieldUpdateOperationsInput | string
   headName?: Prisma.StringFieldUpdateOperationsInput | string
-  headId?: Prisma.StringFieldUpdateOperationsInput | string
+  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -433,7 +433,7 @@ export type HouseholdCreateWithoutChwInput = {
   id?: string
   village: string
   headName: string
-  headId: string
+  headId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   individuals?: Prisma.IndividualCreateNestedManyWithoutHouseholdInput
@@ -443,7 +443,7 @@ export type HouseholdUncheckedCreateWithoutChwInput = {
   id?: string
   village: string
   headName: string
-  headId: string
+  headId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   individuals?: Prisma.IndividualUncheckedCreateNestedManyWithoutHouseholdInput
@@ -483,7 +483,7 @@ export type HouseholdScalarWhereInput = {
   chwId?: Prisma.StringFilter<"Household"> | string
   village?: Prisma.StringFilter<"Household"> | string
   headName?: Prisma.StringFilter<"Household"> | string
-  headId?: Prisma.StringFilter<"Household"> | string
+  headId?: Prisma.StringNullableFilter<"Household"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Household"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Household"> | Date | string
 }
@@ -492,7 +492,7 @@ export type HouseholdCreateWithoutIndividualsInput = {
   id?: string
   village: string
   headName: string
-  headId: string
+  headId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   chw: Prisma.UserCreateNestedOneWithoutHouseholdsInput
@@ -503,7 +503,7 @@ export type HouseholdUncheckedCreateWithoutIndividualsInput = {
   chwId: string
   village: string
   headName: string
-  headId: string
+  headId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -528,7 +528,7 @@ export type HouseholdUpdateWithoutIndividualsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   village?: Prisma.StringFieldUpdateOperationsInput | string
   headName?: Prisma.StringFieldUpdateOperationsInput | string
-  headId?: Prisma.StringFieldUpdateOperationsInput | string
+  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   chw?: Prisma.UserUpdateOneRequiredWithoutHouseholdsNestedInput
@@ -539,7 +539,7 @@ export type HouseholdUncheckedUpdateWithoutIndividualsInput = {
   chwId?: Prisma.StringFieldUpdateOperationsInput | string
   village?: Prisma.StringFieldUpdateOperationsInput | string
   headName?: Prisma.StringFieldUpdateOperationsInput | string
-  headId?: Prisma.StringFieldUpdateOperationsInput | string
+  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -548,7 +548,7 @@ export type HouseholdCreateManyChwInput = {
   id?: string
   village: string
   headName: string
-  headId: string
+  headId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -557,7 +557,7 @@ export type HouseholdUpdateWithoutChwInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   village?: Prisma.StringFieldUpdateOperationsInput | string
   headName?: Prisma.StringFieldUpdateOperationsInput | string
-  headId?: Prisma.StringFieldUpdateOperationsInput | string
+  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   individuals?: Prisma.IndividualUpdateManyWithoutHouseholdNestedInput
@@ -567,7 +567,7 @@ export type HouseholdUncheckedUpdateWithoutChwInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   village?: Prisma.StringFieldUpdateOperationsInput | string
   headName?: Prisma.StringFieldUpdateOperationsInput | string
-  headId?: Prisma.StringFieldUpdateOperationsInput | string
+  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   individuals?: Prisma.IndividualUncheckedUpdateManyWithoutHouseholdNestedInput
@@ -577,7 +577,7 @@ export type HouseholdUncheckedUpdateManyWithoutChwInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   village?: Prisma.StringFieldUpdateOperationsInput | string
   headName?: Prisma.StringFieldUpdateOperationsInput | string
-  headId?: Prisma.StringFieldUpdateOperationsInput | string
+  headId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -682,7 +682,7 @@ export type $HouseholdPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     chwId: string
     village: string
     headName: string
-    headId: string
+    headId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["household"]>
