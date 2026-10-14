@@ -1,33 +1,32 @@
+import { Redirect } from "expo-router";
+import {StyleSheet, View, Text, ActivityIndicator} from 'react-native';
+import { useAuthStore } from "../src/stores/auth";
 
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+export default function Index(){
+  const isHydrating = useAuthStore((state)=> state.isHydrating);
+  const isAuthenticated = useAuthStore((state)=> state.isAuthenticated);
 
-export default function HomeScreen(){
-
-    return(
-        <View style = {styles.container}>
-            <Text style ={styles.title}>Hello from hBridge</Text>
-            <Text style ={styles.subtitle}>Mobile App is running</Text>
-            <StatusBar style="auto" />
-        </View>
+  // if the app is still hydrating, we show a loading screen
+  if(isHydrating){
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#16A34A" />
+      </View>
     );
+  }
+  // if the user is authenticated,
+  if(isAuthenticated){
+
+  return <Redirect href="/(app)/home" />;
+  }
+  return <Redirect href="/(auth)/login" />;
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex:1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent:'center'
-    },
-    title:{
-        fontSize: 24,
-        fontWeight: '700',
-        color: '#111827'
-    },
-    subtitle:{
-        fontSize: 14,
-        color: '#6B7280',
-        marginTop: 8,
-    },
+  container: {
+    flex: 1,
+    backgroundColor: '#F9FAFB',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
