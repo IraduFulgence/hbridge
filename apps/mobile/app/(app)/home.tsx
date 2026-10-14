@@ -8,12 +8,14 @@ import {
 import { router } from 'expo-router';
 import { useAuthStore } from '../../src/stores/auth';
 import { useHealth } from '../../src/api/health';
-
+import { useTranslation } from 'react-i18next';
 export default function HomeScreen() {
   const user = useAuthStore((state) => state.user);
   const clearSession = useAuthStore((state) => state.clearSession);
 
   const { data: health, isLoading } = useHealth();
+
+  const { t } = useTranslation();
 
   const handleLogout = async () => {
     await clearSession();
@@ -23,29 +25,29 @@ export default function HomeScreen() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.greeting}>
-        Good to see you, {user?.firstName}
+        {t('home.greeting')},{user?.firstName}
       </Text>
       <Text style={styles.role}>
         {user?.role?.replace(/_/g, ' ').toLowerCase()} · {user?.district ?? 'Rwanda'}
       </Text>
 
       <View style={styles.card}>
-        <Text style={styles.cardTitle}>BACKEND STATUS</Text>
+        <Text style={styles.cardTitle}>{t('home.backendStatus')}</Text>
         {isLoading ? (
           <Text style={styles.row}>Loading...</Text>
         ) : health ? (
           <>
             <Text style={styles.status}> {health.data.service}</Text>
-            <Text style={styles.row}>Database: {health.data.database.status}</Text>
-            <Text style={styles.row}>Users: {health.data.database.userCount}</Text>
+            <Text style={styles.row}>{t('home.database')}: {health.data.database.status}</Text>
+            <Text style={styles.row}>{t('home.users')}: {health.data.database.userCount}</Text>
           </>
         ) : (
-          <Text style={styles.row}>Unable to reach backend</Text>
+          <Text style={styles.row}>{t('home.cannotReachBackend')}</Text>
         )}
       </View>
 
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-        <Text style={styles.logoutText}>Sign out</Text>
+        <Text style={styles.logoutText}>{t('home.signOut')}</Text>
       </TouchableOpacity>
     </ScrollView>
   );

@@ -13,12 +13,13 @@ import {
 } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useVerifyOtp } from '../../src/api/auth';
-
+import { useTranslation } from 'react-i18next';
 const OTP_LENGTH = 6;
 
 export default function OtpScreen() {
   const { tempToken } = useLocalSearchParams<{ tempToken: string }>();
   const [code, setCode] = useState('');
+  const { t } = useTranslation();
   const inputRef = useRef<TextInput>(null);
 
   const verifyMutation = useVerifyOtp();
@@ -33,7 +34,7 @@ export default function OtpScreen() {
     const finalCode = codeToVerify ?? code;
 
     if (finalCode.length !== OTP_LENGTH) {
-      Alert.alert('Invalid code', 'Please enter all 6 digits.');
+      Alert.alert(t('auth.invalidCode'), t('auth.invalidCodeMessage'));
       return;
     }
 
@@ -51,9 +52,9 @@ export default function OtpScreen() {
         },
         onError: (err: any) => {
           const message =
-            err?.response?.data?.message || 'Invalid or expired code';
+            err?.response?.data?.message || t('auth.verificationFailed');
           Alert.alert(
-            'Verification failed',
+            t('auth.invalidOrExpired'),
             Array.isArray(message) ? message.join(', ') : message,
           );
           setCode('');
@@ -82,14 +83,14 @@ export default function OtpScreen() {
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
-      <Text style={styles.title}>Enter verification code</Text>
-      <Text style={styles.subtitle}>We sent a 6-digit code to your phone</Text>
+      <Text style={styles.title}>{t('auth.otpTitle')}</Text>
+      <Text style={styles.subtitle}>{t('auth.otpSubtitle')}</Text>
 
       {/* The 6 boxes are tappable and forward focus to the hidden input */}
       <Pressable style={styles.otpRow} onPress={focusInput}>
         {Array.from({ length: OTP_LENGTH }).map((_, i) => {
           const digit = code[i] ?? '';
-          const isFocused = code.length === i; // current cursor position
+          const isFocused = code.length === i; 
           return (
             <View
               key={i}
@@ -128,12 +129,12 @@ export default function OtpScreen() {
         {verifyMutation.isPending ? (
           <ActivityIndicator color="#FFFFFF" />
         ) : (
-          <Text style={styles.buttonText}>Verify</Text>
+          <Text style={styles.buttonText}>{t('auth.verify')}</Text>
         )}
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => router.replace('/(auth)/login')}>
-        <Text style={styles.backLink}>← Back to sign in</Text>
+        <Text style={styles.backLink}>{t('auth.backToSignIn')}</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );

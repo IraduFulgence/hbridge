@@ -1,0 +1,51 @@
+{
+  "common": {
+    "loading": "Turashakisha...",
+    "error": "Hari ikibazo cyabaye",
+    "retry": "Gerageza",
+    "cancel": "Reka",
+    "save": "Bika",
+    "back": "Subira",
+    "next": "Komeza",
+    "continue": "Komeza",
+    "yes": "Yego",
+    "no": "Oya"
+  },
+  "auth": {
+    "eyebrow": "UBUZIMA BW'ABATURAGE",
+    "welcome": "Murakaza neza kuri HBridge",
+    "subtitle": "Injira kugira ngo ukomeze ufashe abaturage bawe.",
+    "phoneLabel": "Numero ya telefone",
+    "phonePlaceholder": "788 000 003",
+    "passwordLabel": "Ijambo banga",
+    "passwordPlaceholder": "Andika ijambo banga",
+    "signIn": "Injira",
+    "forgotPassword": "Wibagiwe ijambo banga?",
+    "footer": "Amakuru yawe ararinzwe kandi ni ibanga",
+    "loginFailed": "Kwinjira byanze",
+    "invalidCredentials": "Amakuru yinjijwe ntabwo ari yo",
+    "missingInfo": "Amakuru abura",
+    "missingInfoMessage": "Andika numero ya telefone n'ijambo banga.",
+    "otpTitle": "Andika kode yo kwemeza",
+    "otpSubtitle": "Twohereje kode y'imibare 6 kuri telefone yawe",
+    "verify": "Emeza",
+    "backToSignIn": "Subira ku kwinjira",
+    "invalidCode": "Kode ntiyemewe",
+    "invalidCodeMessage": "Andika imibare yose 6.",
+    "verificationFailed": "Kwemeza byanze",
+    "invalidOrExpired": "Kode ntiyemewe cyangwa yarangiye"
+  },
+  "home": {
+    "greeting": "Muraho",
+    "backendStatus": "IMITERERE Y'UBUHINGA",
+    "database": "Ububiko bw'amakuru",
+    "users": "Abakoresha",
+    "signOut": "Sohoka",
+    "cannotReachBackend": "Ntibishoboka kugera kuri seriveri"
+  },
+  "language": {
+    "title": "Ururimi",
+    "english": "Icyongereza",
+    "kinyarwanda": "Ikinyarwanda"
+  }
+}

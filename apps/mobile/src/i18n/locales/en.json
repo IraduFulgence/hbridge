@@ -1,0 +1,51 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Retry",
+    "cancel": "Cancel",
+    "save": "Save",
+    "back": "Back",
+    "next": "Next",
+    "continue": "Continue",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "auth": {
+    "eyebrow": "COMMUNITY HEALTH",
+    "welcome": "Welcome to HBridge",
+    "subtitle": "Sign in to continue supporting your community.",
+    "phoneLabel": "Phone number",
+    "phonePlaceholder": "788 000 003",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "signIn": "Sign in",
+    "forgotPassword": "Forgot password?",
+    "footer": "Your information is secure and private",
+    "loginFailed": "Login failed",
+    "invalidCredentials": "Invalid credentials",
+    "missingInfo": "Missing info",
+    "missingInfoMessage": "Please enter your phone and password.",
+    "otpTitle": "Enter verification code",
+    "otpSubtitle": "We sent a 6-digit code to your phone",
+    "verify": "Verify",
+    "backToSignIn": "Back to sign in",
+    "invalidCode": "Invalid code",
+    "invalidCodeMessage": "Please enter all 6 digits.",
+    "verificationFailed": "Verification failed",
+    "invalidOrExpired": "Invalid or expired code"
+  },
+  "home": {
+    "greeting": "Good to see you",
+    "backendStatus": "BACKEND STATUS",
+    "database": "Database",
+    "users": "Users",
+    "signOut": "Sign out",
+    "cannotReachBackend": "Unable to reach backend"
+  },
+  "language": {
+    "title": "Language",
+    "english": "English",
+    "kinyarwanda": "Kinyarwanda"
+  }
+}
