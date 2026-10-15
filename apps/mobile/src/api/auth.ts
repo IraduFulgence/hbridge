@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { apiClient } from "./client";
 import { useAuthStore } from "../stores/auth";
 
-import type { ApiResponse,LoginRequest, LoginResponse, VerifyOtpRequest,VerifyOtpResponse, AuthUser } from "@hbridge/shared";
+import type { ApiResponse,LoginRequest, LoginResponse, VerifyOtpRequest,VerifyOtpResponse, AuthUser, ResendOtpRequest,ResendOtpResponse } from "@hbridge/shared";
 
 // send login request to the server using phone and password
 
@@ -39,4 +39,17 @@ export function useVerifyOtp(){
             });
         },
     });
+
+    
 }
+// resend token 
+    export function useResendOtp(){
+        return useMutation({
+            mutationFn: async (data: ResendOtpRequest) =>{
+                const response = await apiClient.post<ApiResponse<ResendOtpResponse>>(
+                    '/auth/resend-otp',data,
+                );
+                return response.data.data;
+            },
+        });
+    }

@@ -12,9 +12,9 @@
     "no": "Oya"
   },
   "auth": {
-    "eyebrow": "UBUZIMA BW'ABATURAGE",
-    "welcome": "Murakaza neza kuri HBridge",
-    "subtitle": "Injira kugira ngo ukomeze ufashe abaturage bawe.",
+    "eyebrow": "UMUJYANAMA W' UBUZIMA ",
+    "welcome": "Ikaze kuri HBridge",
+    "subtitle": "Injira kurubuga.",
     "phoneLabel": "Numero ya telefone",
     "phonePlaceholder": "788 000 003",
     "passwordLabel": "Ijambo banga",
@@ -33,7 +33,15 @@
     "invalidCode": "Kode ntiyemewe",
     "invalidCodeMessage": "Andika imibare yose 6.",
     "verificationFailed": "Kwemeza byanze",
-    "invalidOrExpired": "Kode ntiyemewe cyangwa yarangiye"
+    "invalidOrExpired": "Kode ntiyemewe cyangwa yarangiye",
+    "resendIn": "Ohereza kode nyuma y'",
+    "resendNow": "Ohereza kode",
+    "didntReceive": "Ntabwo wabonye kode?",
+    "getHelp": "Saba ubufasha",
+    "needHelp": "Ukeneye ubufasha?",
+    "contactSupport": "Vugana n'umuyobozi wawe kugira ngo ubone ubufasha.",
+    "checkYourPhone":"Reba ubutumwa bugufi!",
+    "codeSent":"Code yoherejwe"
   },
   "home": {
     "greeting": "Muraho",

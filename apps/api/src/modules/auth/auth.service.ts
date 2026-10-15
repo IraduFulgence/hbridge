@@ -14,6 +14,7 @@ import { SmsService } from '../../sms/sms.service.js';
 import { LoginDTO } from './dto/login.dto.js';
 import { RegisterDto } from './dto/register.dto.js';
 import { VerifyOtpDto } from './dto/verify-otp.dto.js';
+import { ResendOtpDto } from './dto/resend-otp.dto.js';
 
 const OTP_INTENT_LOGIN = '2fa-login';
 
@@ -111,6 +112,44 @@ export class AuthService {
 
     return this.issueTokens(user);
   }
+
+  async resendOtp(dto: ResendOtpDto) {
+  // Verify the temp token to get the user
+  let payload: any;
+  try {
+    payload = await this.jwt.verifyAsync(dto.tempToken, {
+      secret: this.config.get<string>('jwt.tempSecret'),
+    });
+  } catch {
+    throw new UnauthorizedException('Invalid or expired temp token');
+  }
+
+  if (payload.purpose !== 'otp-verification') {
+    throw new UnauthorizedException('Invalid token purpose');
+  }
+
+  const user = await this.prisma.user.findUnique({
+    where: { id: payload.sub },
+  });
+
+  if (!user || !user.isActive) {
+    throw new UnauthorizedException('User not found');
+  }
+
+  // Generate fresh OTP
+  const otp = await this.otp.generateOtp(user.phone, OTP_INTENT_LOGIN);
+
+  const sent = await this.sms.sendSms(
+    user.phone,
+    `Your HBridge verification code is: ${otp}. It expires in 5 minutes.`,
+  );
+
+  if (!sent) {
+    throw new BadRequestException('Failed to send verification code');
+  }
+
+  return { message: 'Verification code resent' };
+}
 
   async register(dto: RegisterDto) {
     const existing = await this.prisma.user.findUnique({

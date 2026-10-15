@@ -43,3 +43,11 @@ export interface VerifyOtpResponse {
   accessToken: string;
   refreshToken: string;
 }
+
+export interface ResendOtpRequest {
+  tempToken: string;
+}
+
+export interface ResendOtpResponse {
+  message: string;
+}

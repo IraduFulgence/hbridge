@@ -16,6 +16,7 @@ import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard.js';
 import { Public } from '../../common/decorators/public.decorator.js';
 import { CurrentUser } from '../../common/decorators/current-user.decorator.js';
 import { VerifyOtpDto } from './dto/verify-otp.dto.js';
+import { ResendOtpDto } from './dto/resend-otp.dto.js';
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
@@ -49,4 +50,13 @@ verifyOtp(@Body() dto: VerifyOtpDto) {
   me(@CurrentUser() user: any) {
     return user;
   }
+
+
+  @Public()
+@Post('resend-otp')
+@HttpCode(HttpStatus.OK)
+@ApiOperation({ summary: 'Resend OTP using the temp token' })
+resendOtp(@Body() dto: ResendOtpDto) {
+  return this.auth.resendOtp(dto);
+}
 }

@@ -12,9 +12,9 @@
     "no": "No"
   },
   "auth": {
-    "eyebrow": "COMMUNITY HEALTH",
+    "eyebrow": "COMMUNITY HEALTH WORKER",
     "welcome": "Welcome to HBridge",
-    "subtitle": "Sign in to continue supporting your community.",
+    "subtitle": "Sign in to continue.",
     "phoneLabel": "Phone number",
     "phonePlaceholder": "788 000 003",
     "passwordLabel": "Password",
@@ -33,7 +33,16 @@
     "invalidCode": "Invalid code",
     "invalidCodeMessage": "Please enter all 6 digits.",
     "verificationFailed": "Verification failed",
-    "invalidOrExpired": "Invalid or expired code"
+    "invalidOrExpired": "Invalid or expired code",
+    "resendIn": "Resend code in",
+    "resendNow": "Resend code",
+    "didntReceive": "Didn't receive a code?",
+    "getHelp": "Get help",
+    "needHelp": "Need help?",
+    "contactSupport": "Please contact your supervisor for assistance.",
+    "checkYourPhone":"Check your message!",
+    "codeSent":"Code sent"
+    
   },
   "home": {
     "greeting": "Good to see you",

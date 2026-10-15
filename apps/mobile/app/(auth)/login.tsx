@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import  { View, Text, TextInput, Button, StyleSheet, Alert
-    , ActivityIndicator, KeyboardAvoidingView, Platform, TouchableOpacity
+    , ActivityIndicator, KeyboardAvoidingView, Platform, TouchableOpacity,
+    Keyboard
  } from "react-native";
 
  import { router } from "expo-router";
@@ -13,14 +14,35 @@ import { LanguageSwitcher } from '../../src/components/LanguageSwitcher';
  
  export default function LoginScreen() {
 
+
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-
+    const [iskeyboardOpen, setIsKeyboardOpen] = useState(false);
     const loginMutation = useLogin();
     const { t } = useTranslation();
-    // handle login request
+  
+    
+  // start of footer hidding logic using keyboard events
 
+    useEffect(() => {
+    const showFooter = Keyboard.addListener('keyboardDidShow', () => {
+      setIsKeyboardOpen(true);
+    });
+    const hideFooter = Keyboard.addListener('keyboardDidHide', () => {
+      setIsKeyboardOpen(false);
+    });
+
+    return () => {
+      showFooter.remove();
+      hideFooter.remove();
+    };
+  }, []);
+  // end of footer hidding logic
+    
+    
+    
+    // handle login request
     const handleSubmit = () =>{
         if(!phone || !password){
             Alert.alert('Error', t('auth.missingInfoMessage'));
@@ -37,7 +59,7 @@ import { LanguageSwitcher } from '../../src/components/LanguageSwitcher';
 
                 router.push({
                     pathname: '/(auth)/verifyotp',
-                    params: {tempToken: data.tempToken},
+                    params: {tempToken: data.tempToken,  phone: formatphone},
                 });
 
             },
@@ -66,7 +88,7 @@ import { LanguageSwitcher } from '../../src/components/LanguageSwitcher';
 
               {/* heading texts */}
              <Text style={styles.eyebrow}>{t('auth.eyebrow')}</Text>
-             <Text style={styles.title}>{t('auth.welcome')}</Text>
+             
              <Text style={styles.subtitle}>
               {t('auth.subtitle')}
              </Text>
@@ -78,7 +100,7 @@ import { LanguageSwitcher } from '../../src/components/LanguageSwitcher';
         <Text style={styles.label}>{t('auth.phoneLabel')}</Text>
         <View style={styles.inputContainer}>
         <View style={styles.phonePrefix}>
-          <Ionicons name="call-outline" size={16} color="#000000" />
+          <Ionicons name="call-outline" size={16} color="#374151" />
           <Text style={styles.prefixText}>+250</Text>
         </View>
         <View style={styles.divider} />
@@ -137,10 +159,12 @@ import { LanguageSwitcher } from '../../src/components/LanguageSwitcher';
       </TouchableOpacity>
 
       {/* Footer trust badge */}
-      <View style={styles.footer}>
-        <Text style={styles.footerIcon}>🔒</Text>
+      {!iskeyboardOpen && (
+        <View style={styles.footer}>
+        <Ionicons name="shield-checkmark-outline" style={styles.footerIcon} />
         <Text style={styles.footerText}>	{t('auth.footer')}</Text>
       </View>
+      )}
         </KeyboardAvoidingView>
     );
 
@@ -179,8 +203,8 @@ const styles = StyleSheet.create({
 
   // Headings
   eyebrow: {
-    fontSize: 11,
-    fontWeight: '700',
+    fontSize: 20,
+    fontWeight: '900',
     color: '#16A34A',
     letterSpacing: 1,
     marginBottom: 8,
@@ -193,15 +217,21 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   subtitle: {
-    fontSize: 15,
-    color: '#6B7280',
+    fontSize: 18,
+    color: '#000000',
     marginBottom: 32,
     lineHeight: 22,
+    marginTop:20,
+    alignContent: 'center',
+    textAlign: 'center',
+    fontWeight: '900',
+    fontStyle: 'normal'
+
   },
 
   // Inputs
   label: {
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: '600',
     color: '#374151',
     marginBottom: 8,
@@ -230,7 +260,7 @@ const styles = StyleSheet.create({
   },
  
   prefixText: {
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: '600',
     color: '#374151',
   },
@@ -265,14 +295,14 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: 23,
     fontWeight: '700',
   },
 
   // Forgot
   forgotLink: {
     marginTop: 20,
-    fontSize: 14,
+    fontSize: 16,
     color: '#16A34A',
     textAlign: 'center',
     fontWeight: '600',
@@ -285,12 +315,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 'auto',
     gap: 6,
+    
   },
   footerIcon: {
-    fontSize: 11,
+    fontSize: 18,
   },
   footerText: {
-    fontSize: 12,
+    fontSize: 14,
     color: '#9CA3AF',
   },
 });
