@@ -6,6 +6,17 @@ export const Gender = {
 
 export type Gender = (typeof Gender)[keyof typeof Gender];
 
+export interface PatientHousehold {
+  id: string;
+  village: string;
+  chwId: string;
+  chw?: {
+    id: string;
+    firstName: string;
+    lastName: string;
+  };
+}
+
 export interface Patient {
   id: string;
   householdId: string;
@@ -24,16 +35,7 @@ export interface Patient {
   isActive: boolean;
   createdAt: string;
   updatedAt: string;
-  household?: {
-    id: string;
-    village: string;
-    chwId: string;
-    chw?: {
-      id: string;
-      firstName: string;
-      lastName: string;
-    };
-  };
+  household?: PatientHousehold;
 }
 
 export interface CreatePatientRequest {

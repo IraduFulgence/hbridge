@@ -9,6 +9,8 @@ export default function AppLayout() {
         return <Redirect href="/(auth)/login" />;
     }
     return (
-        <Stack screenOptions={{headerShown:false, animation: 'slide_from_right'}} />
+        <Stack screenOptions={{headerShown:false, animation: 'slide_from_right'}}>
+            <Stack.Screen name="(tabs)" />
+        </Stack>
     );
 }

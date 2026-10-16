@@ -45,10 +45,15 @@
     
   },
   "home": {
-    "greeting": "Good to see you",
-    "backendStatus": "BACKEND STATUS",
-    "database": "Database",
-    "users": "Users",
+    "greeting": "Good morning, {{lastName}}",
+    "followupDue": "{{count}} Follow-ups due today",
+    "followupMessage": "Review patients needing your care",
+    "quickActions": "Quick actions",
+   "newPatient": "New Patient",
+   "newPatientHint": "Register someone",
+   "screening": "Screening",
+   "screeningHint": "Record health data",
+   "myPatients": "My patients ({{count}})",
     "signOut": "Sign out",
     "cannotReachBackend": "Unable to reach backend"
   },
@@ -56,5 +61,38 @@
     "title": "Language",
     "english": "English",
     "kinyarwanda": "Kinyarwanda"
-  }
+  },
+  "header": {
+  "profile": "Profile",
+  "signOut": "Sign out"
+},
+"patients":{
+ "statusHigh": "High",
+ "statusReview": "Review",
+ "statusStable": "Stable",
+ "viewAll":"View All",
+ "title": "Patients",
+  "searchPlaceholder": "Search patients...",
+  "empty": "No patients yet",
+  "emptyHint": "Patients you register will appear here.",
+  "noResults": "No matches",
+  "tryDifferent": "Try a different name or phone number.",
+  "hypertension": "Hypertension",
+  "diabetes": "Diabetes",
+  "epilepsy": "Epilepsy",
+  "noConditions": "No conditions recorded",
+  "notFound": "Patient not found",
+"conditions": "Conditions",
+"recentScreenings": "Recent screenings",
+"noScreenings": "No screenings recorded yet.",
+"recordScreening": "Record screening"
+},
+"tabs": {
+  "home": "Home",
+  "patients": "Patients",
+  "screenings": "Screenings",
+  "profile": "Profile"
+}
+
+
 }

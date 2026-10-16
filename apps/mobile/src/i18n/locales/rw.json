@@ -44,10 +44,16 @@
     "codeSent":"Code yoherejwe"
   },
   "home": {
-    "greeting": "Muraho",
-    "backendStatus": "IMITERERE Y'UBUHINGA",
-    "database": "Ububiko bw'amakuru",
+    "greeting": "Muraho, {{lastName}}",
+    "followupDue": "{{count}} Abakurikiranwa uyu munsi",
+    "followupMessage": "Reba abarwayi bakeneye ubufasha",
     "users": "Abakoresha",
+    "quickActions": "Ibikorwa byihuse",
+    "newPatientHint": "Andika umuntu",
+    "newPatient": "Umurwayi Mushya",
+    "screeningHint": "Andika amakuru y'ubuzima",
+    "screening": "Isuzuma",
+    "myPatients": "Abarwayi banjye ({{count}})",
     "signOut": "Sohoka",
     "cannotReachBackend": "Ntibishoboka kugera kuri seriveri"
   },
@@ -55,5 +61,36 @@
     "title": "Ururimi",
     "english": "Icyongereza",
     "kinyarwanda": "Ikinyarwanda"
-  }
+  },
+  "header": {
+  "profile": "Umwirondoro",
+  "signOut": "Sohoka"
+},
+"patients":{
+  "statusHigh": "Biteye impungenge",
+  "statusReview": "Kureba",
+  "statusStable": "Bihagaze neza",
+  "viewAll":"Reba bose",
+  "title": "Abarwayi",
+  "searchPlaceholder": "Shakisha abarwayi...",
+  "empty": "Nta barwayi bahari",
+  "emptyHint": "Abarwayi wanditse bazagaragara hano.",
+  "noResults": "Nta byabonetse",
+  "tryDifferent": "Gerageza izindi mazina cyangwa numero.",
+  "hypertension": "Umuvuduko w'amaraso",
+  "diabetes": "Diyabete",
+  "epilepsy": "Igicuri",
+  "noConditions": "Nta ndwara zanditswe",
+  "notFound": "Umurwayi ntiyabonetse",
+"conditions": "Indwara",
+"recentScreenings": "Isuzuma rya vuba",
+"noScreenings": "Nta suzuma ryarakozwe.",
+"recordScreening": "Andika isuzuma"
+},
+"tabs": {
+  "home": "Ahabanza",
+  "patients": "Abarwayi",
+  "screenings": "Isuzuma",
+  "profile": "Umwirondoro"
+}
 }

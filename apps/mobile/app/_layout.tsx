@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import '../src/i18n'; 
 import { syncLanguageWithI18n } from '../src/i18n/sync';
 import { useLanguageStore } from '../src/stores/language';
+import { MenuProvider } from 'react-native-popup-menu';
 export default function RootLayout() {
 
   const hydrate = useAuthStore((state)=> state.hydrate);
@@ -23,13 +24,15 @@ const hydrateLanguage = useLanguageStore((state) => state.hydrate);
   }, []);
   return (
     <QueryClientProvider client={queryClient}>
-      <Stack screenOptions={{ headerShown: false }} >
+      <MenuProvider>
+         <Stack screenOptions={{ headerShown: false }} >
       <Stack.Screen name ="(auth)" />
       <Stack.Screen name ="(app)" />
       <Stack.Screen name ="index" />
       
       </Stack>
       <StatusBar style="auto" />
+      </MenuProvider>
     </QueryClientProvider>
   );
 }
