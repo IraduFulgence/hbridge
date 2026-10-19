@@ -85,7 +85,11 @@
 "conditions": "Conditions",
 "recentScreenings": "Recent screenings",
 "noScreenings": "No screenings recorded yet.",
-"recordScreening": "Record screening"
+"recordScreening": "Record screening",
+"male":"male",
+"female":"female",
+"newTitle":"New Patient",
+"basicInfo":"Basic information"
 },
 "tabs": {
   "home": "Home",

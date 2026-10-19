@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { Header } from '../../../src/components/Header';
 import {usePatients} from '../../../src/api/patients';
 import { Ionicons } from '@expo/vector-icons';
-
+import { useHouseholds } from '../../../src/api/households';
 
 export default function HomeScreen() {
   const user = useAuthStore((state) => state.user);
@@ -22,6 +22,8 @@ export default function HomeScreen() {
   const {data:patients} = usePatients();
   const patientCount = patients?.length ?? 0;
   const previewPatients = (patients ?? []).slice(0, 3);
+  const {data:households} = useHouseholds();
+  const houseCount = households?.length ?? 0;
   const today = new Date().toLocaleDateString('en-GB',{
     weekday:'long',
     day:'numeric',
@@ -101,6 +103,24 @@ export default function HomeScreen() {
               {t('home.screeningHint')}
             </Text>
           </TouchableOpacity>
+
+            <TouchableOpacity
+    style={styles.actionCard}
+    onPress={() => router.push('/households/new')}
+    activeOpacity={0.7}
+  >
+    <View style={[styles.actionIcon, { backgroundColor: '#FEF3C7' }]}>
+      <Ionicons name="home" size={22} color="#D97706" />
+    </View>
+    <Text style={styles.actionTitle}>Households</Text>
+    <Text style={styles.actionSubtitle}>
+      {houseCount} registered
+    </Text>
+  </TouchableOpacity>
+
+
+
+
      </View>
 
      {/* my patients */}

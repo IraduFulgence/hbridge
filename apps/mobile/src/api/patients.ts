@@ -34,7 +34,7 @@ export default function usePatient(id: string | undefined){
     return useQuery({
         queryKey:patientKeys.detail(id ?? ''),
         queryFn: async () =>{
-            const response = await apiClient.get<ApiResponse<Patient>>('/patients/${id}',
+            const response = await apiClient.get<ApiResponse<Patient>>(`/patients/${id}`,
 
             );
             return response.data.data;

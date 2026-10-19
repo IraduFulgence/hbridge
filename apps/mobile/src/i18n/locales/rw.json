@@ -85,7 +85,11 @@
 "conditions": "Indwara",
 "recentScreenings": "Isuzuma rya vuba",
 "noScreenings": "Nta suzuma ryarakozwe.",
-"recordScreening": "Andika isuzuma"
+"recordScreening": "Andika isuzuma",
+"male":"gabo",
+"female":"gore",
+"newTitle":"Umurwayi Mushya",
+"basicInfo":"Amakuru y'ibanze"
 },
 "tabs": {
   "home": "Ahabanza",

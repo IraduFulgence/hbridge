@@ -14,6 +14,7 @@ import { RolesGuard } from './common/guards/role.guard.js';
 import { UsersModule } from './modules/users/users.module.js';
 import { PatientsModule } from './modules/patients/patient.module.js';
 import { ScreeningsModule } from './modules/screenings/screening.module.js';
+import { HouseholdsModule } from './modules/households/household.module.js';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -30,6 +31,7 @@ import { ScreeningsModule } from './modules/screenings/screening.module.js';
     UsersModule,
     PatientsModule,
     ScreeningsModule,
+    HouseholdsModule
   ],
   controllers: [],
   providers: [

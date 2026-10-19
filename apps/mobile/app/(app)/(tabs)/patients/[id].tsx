@@ -98,11 +98,13 @@ export default function PatientDetailScreen() {
               <Text style={styles.infoText}>{patient.address}</Text>
             </View>
           )}
-          {patient.household?.village && (
+          {patient.household && (
             <View style={styles.infoRow}>
-              <Ionicons name="home-outline" size={16} color="#6B7280" />
-              <Text style={styles.infoText}>{patient.household.village}</Text>
-            </View>
+    <Ionicons name="home-outline" size={16} color="#6B7280" />
+    <Text style={styles.infoText}>
+      {patient.household.headName} ({patient.household.village})
+    </Text>
+  </View>
           )}
         </View>
 

@@ -10,6 +10,8 @@ export interface PatientHousehold {
   id: string;
   village: string;
   chwId: string;
+  headId: string | null;
+  headName: string;
   chw?: {
     id: string;
     firstName: string;
@@ -48,6 +50,7 @@ export interface CreatePatientRequest {
   address?: string;
   village?: string;
   headName?: string;
+  headId?: string;
   hasHypertension?: boolean;
   hasDiabetes?: boolean;
 }
