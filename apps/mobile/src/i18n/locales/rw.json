@@ -89,7 +89,20 @@
 "male":"gabo",
 "female":"gore",
 "newTitle":"Umurwayi Mushya",
-"basicInfo":"Amakuru y'ibanze"
+"basicInfo":"Amakuru y'ibanze",
+"fields": {
+  "firstName": "Izina rya mbere",
+  "lastName": "Izina rya kabiri",
+  "gender": "Igitsina",
+  "age": "Imyaka",
+  "phone": "Telefone (bidategetswe)",
+  "village": "Umudugudu"
+},
+"errors": {
+  "validation": "Reba amakuru wanditse",
+  "nameRequired": "Izina rya mbere n'irya kabiri birakenewe.",
+  "createFailed": "Ntibyakunze gukora umurwayi"
+}
 },
 "tabs": {
   "home": "Ahabanza",

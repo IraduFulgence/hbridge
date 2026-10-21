@@ -53,4 +53,5 @@ export interface CreatePatientRequest {
   headId?: string;
   hasHypertension?: boolean;
   hasDiabetes?: boolean;
+  hasEpilepsy?:boolean;
 }

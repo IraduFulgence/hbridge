@@ -89,7 +89,20 @@
 "male":"male",
 "female":"female",
 "newTitle":"New Patient",
-"basicInfo":"Basic information"
+"basicInfo":"Basic information",
+"fields": {
+  "firstName": "First name",
+  "lastName": "Last name",
+  "gender": "Gender",
+  "age": "Age",
+  "phone": "Phone (optional)",
+  "village": "Village"
+},
+"errors": {
+  "validation": "Check your inputs",
+  "nameRequired": "First and last name are required.",
+  "createFailed": "Could not create patient"
+}
 },
 "tabs": {
   "home": "Home",
