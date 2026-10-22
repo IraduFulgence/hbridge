@@ -7,7 +7,7 @@ import { CreateHouseholdDto } from "./dto/create-household.dto";
 import { userRole } from "../../common/constants/roles.enum";
 @ApiTags('households')
 @ApiBearerAuth()
-@Controller('houesholds')
+@Controller('households')
 
 export class HouseholdController{
     constructor(private readonly households:HouseholdServices){}

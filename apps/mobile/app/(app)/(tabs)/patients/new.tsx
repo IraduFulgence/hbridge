@@ -260,17 +260,7 @@ export default function CreatPatientScreen(){
             editable={!createPatient.isPending}
           />
 
-          <Text style={styles.label}>
-            {t('patients.fields.village', { defaultValue: 'Village' })}
-          </Text>
-          <TextInput
-            style={styles.input}
-            value={village}
-            onChangeText={setVillage}
-            placeholder="Remera"
-            placeholderTextColor="#9CA3AF"
-            editable={!createPatient.isPending}
-          />
+          
 
           <Text style={styles.sectionTitle}>
             {t('patients.sections.conditions', {
@@ -304,7 +294,7 @@ export default function CreatPatientScreen(){
               styles.submitButton,
               createPatient.isPending && styles.submitButtonDisabled,
             ]}
-            onPress={()=>''}
+            onPress={()=>SavePatient()}
             disabled={createPatient.isPending}
           >
             {createPatient.isPending ? (

@@ -44,9 +44,17 @@ export function useHouseholdByHeadId(headId:string | undefined){
     return useQuery({
         queryKey:householdKeys.head(headId ?? ''),
         queryFn: async () =>{
-            const response = await apiClient.get<ApiResponse<Household>>
-            (`/households/head/${headId}`,);
-            return response.data.data;
+            try {
+        const response = await apiClient.get<ApiResponse<Household>>(
+          `/households/head/${headId}`,
+        );
+        return response.data.data;
+      } catch (err: any) {
+        if (err.response?.status === 404) {
+          return null;
+        }
+        throw err;
+      }
         },
         enabled: !!headId && headId.length > 5,
 
