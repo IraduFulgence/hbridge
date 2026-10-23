@@ -90,6 +90,7 @@
 "female":"female",
 "newTitle":"New Patient",
 "basicInfo":"Basic information",
+"headFamily":"Head of family",
 "fields": {
   "firstName": "First name",
   "lastName": "Last name",

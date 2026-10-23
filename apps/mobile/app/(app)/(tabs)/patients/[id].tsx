@@ -102,7 +102,7 @@ export default function PatientDetailScreen() {
             <View style={styles.infoRow}>
     <Ionicons name="home-outline" size={16} color="#6B7280" />
     <Text style={styles.infoText}>
-      {patient.household.headName} ({patient.household.village})
+       {t('patients.headFamily :',patient.household.headName) }
     </Text>
   </View>
           )}

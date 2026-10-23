@@ -132,7 +132,7 @@ export class PatientsService {
       where: { id },
       include: {
         household: {
-          select: { id: true, village: true, chwId: true, chw: { select: { id: true, district: true } } },
+          select: { id: true, village: true, headName:true, chwId: true, chw: { select: { id: true, district: true } } },
         },
       },
     });
